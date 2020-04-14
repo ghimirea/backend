@@ -10,10 +10,10 @@ exports.addNewMovie = (req, res, next) => {
     movie_type: req.body.movie_type,
     company: req.body.company,
     director: req.body.director,
-    script_writer:req.body.script_writer,
+    script_writer: req.body.script_writer,
     main_star: req.body.main_star,
     co_star: req.body.co_star,
-    description: req.body.description
+    description: req.body.description,
   });
 
   newMovie
@@ -27,3 +27,12 @@ exports.addNewMovie = (req, res, next) => {
     });
 };
 
+exports.addComment = (req, res, next) => {
+  MoviesSchema.findById(req.body._id)
+    .then(item=>{
+      req.userComment(item).then(result=>{
+        res.redirect("/comment")
+      })
+    })
+    .catch((err) => console.log("can't add a comment!"));
+};

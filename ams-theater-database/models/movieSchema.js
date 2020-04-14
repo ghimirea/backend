@@ -12,7 +12,23 @@ const myMovie = new Schema({
   main_star: { type: String, required: true },
   co_star: { type: String, required: true },
   description: { type: String, required: true },
-  // comments: { comment: [{ type: String, required: true }] },
+  comments: [
+    {
+      author: { userId: { type: mongoose.Types.ObjectId }, userName: "" },
+      userComment: { type: String, default: "" },
+      date: { type: Date, default: Date.now },
+    },
+  ],
 });
+
+myMovie.method.userComment = function (item) {
+  let comment = this.comments;
+  comment.push({
+    author: { userId: "", userName: "" },
+    userComment: "",
+    date: Date,
+  });
+  return this.save();
+};
 
 module.exports = mongoose.model("movies", myMovie);
