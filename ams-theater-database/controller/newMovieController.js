@@ -27,12 +27,27 @@ exports.addNewMovie = (req, res, next) => {
     });
 };
 
-exports.addComment = (req, res, next) => {
-  MoviesSchema.findById(req.body._id)
-    .then(item=>{
-      req.userComment(item).then(result=>{
-        res.redirect("/comment")
-      })
+exports.getMovies = (req, res, next) => {
+  MoviesSchema.find()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
     })
-    .catch((err) => console.log("can't add a comment!"));
+    .catch((err) => {
+      res.status(400).send("couldn't get movies");
+    });
+};
+
+exports.detailMovie = (req, res, next) => {
+  console.log(req.params.id);
+
+  // res.send(200);
+    MoviesSchema.findById(req.params.id)
+      .then((result) => {
+        console.log(result);
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(400).send("couldn't get movies");
+      });
 };
