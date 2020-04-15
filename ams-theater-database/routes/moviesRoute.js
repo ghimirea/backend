@@ -6,4 +6,8 @@ router.get("/all", newMovieController.getMovies);
 router.get("/Detail/:id",newMovieController.detailMovie)
 router.post("/add-new-movie", newMovieController.addNewMovie);
 
+//comment routers
+router.get("/comments",newMovieController.getComment)
+router.post("/comments",newMovieController.addComment)
+
 module.exports = router;
