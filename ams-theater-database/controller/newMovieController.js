@@ -56,7 +56,7 @@ exports.detailMovie = (req, res, next) => {
 exports.getComment = (req, res, next) => {
   MoviesSchema.findById(req.body.id)
     .then((result) => {
-      console.log(result.comments);
+      // console.log(result.comments);
       res.status(200).json(result.comments);
     })
     .catch((err) => {
@@ -83,7 +83,6 @@ exports.addComment = (req, res, next) => {
     if (err) return res.json("comment not posted!");
     return res.json("comment successfully posted!");
   });
-  console.log(req.body);
 
   // MoviesSchema.findById(req.body.id).then((result) => {
   //   result.comments.push({
@@ -91,6 +90,6 @@ exports.addComment = (req, res, next) => {
   //     userComment: req.body.userComment,
   //   });
   //   result.save();
-  //   console.log(result)
+  //   // console.log(result)
   // });
 };
